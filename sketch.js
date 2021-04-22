@@ -1,7 +1,7 @@
 let data;
 
 function preload() {
-  data = loadJSON("pose.json");
+  data = loadJSON("poses.json");
 }
 
 function setup() {
@@ -10,24 +10,18 @@ function setup() {
 
 function draw() {
   frameRate(5);
+  let framePosition = frameCount % data.poses.length;
   background(0);
-  console.info("running");
+  console.info("?");
+  console.info(framePosition + " --- " + frameCount);
 
-  // draw the lines
-  stroke(80);
-  for (let i = 0; i < data.bodypoints.length; i++) {
-    for (let j = 0; j < data.bodypoints.length; j++) {
-      line(
-        data.bodypoints[i].x + noise(frameCount) * 5,
-        data.bodypoints[i].y + noise(frameCount + 1) * 5,
-        data.bodypoints[j].x + noise(frameCount + 2) * 5,
-        data.bodypoints[j].y + noise(frameCount + 3) * 5
-      );
-    }
-  }
-
-  for (let i = 0; i < data.bodypoints.length; i++) {
-    fill(220);
-    circle(data.bodypoints[i].x, data.bodypoints[i].y, 15);
+  for (let i = 0; i < data.poses[framePosition].bodypoints.length; i++) {
+    fill(240);
+    console.info("running");
+    circle(
+      data.poses[framePosition].bodypoints[i].x,
+      data.poses[framePosition].bodypoints[i].y,
+      15
+    );
   }
 }
